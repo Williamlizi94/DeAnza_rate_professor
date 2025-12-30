@@ -1,0 +1,23 @@
+services:
+  api:
+    build: .
+    container_name: deanza-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # 数据文件（持久化）
+      - ./rmp_deanza_all_professors.json:/app/rmp_deanza_all_professors.json
+      # 日志目录
+      - ./logs:/app/logs
+      # 静态文件（可选，如果修改了HTML文件）
+      - ./static:/app/static
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/stats?format=json', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+

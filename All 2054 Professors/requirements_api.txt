@@ -1,0 +1,11 @@
+# De Anza College Professors API - 依赖包列表
+# 安装方法: pip install -r requirements_api.txt
+
+# Web框架和服务器
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# HTTP请求库（用于数据抓取）
+requests>=2.31.0
+
+
